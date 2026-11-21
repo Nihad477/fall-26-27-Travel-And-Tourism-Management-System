@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TRAVESTRO admin dashboard">
+    <title>Admin | TRAVESTRO</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="dash">
+
+    <aside class="sidebar">
+        <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+
+        <div class="profile">
+            <span class="avatar">NH</span>
+            <div><strong>B M NIHAD ALIM</strong><small>Administrator</small></div>
+        </div>
+
+        <button type="button" class="menu-link current" data-panel="panelAccounts">Accounts</button>
+        <button type="button" class="menu-link" data-panel="panelApprovals">Approval Desk</button>
+        <button type="button" class="menu-link" data-panel="panelTickets">Support Tickets</button>
+        <button type="button" class="menu-link" data-panel="panelPromos">Promo Codes</button>
+
+        <a href="signin.html" class="signout">&larr; Sign out</a>
+    </aside>
+
+    <div class="workspace">
+        <header class="topbar">
+            <h1 id="panelTitle">Accounts</h1>
+            <span class="muted" id="todayText"></span>
+        </header>
+
+        <main>
+            <section class="panel" id="panelAccounts">
+                <div class="tiles">
+                    <div class="tile"><b id="countAll">0</b><span>All accounts</span></div>
+                    <div class="tile"><b id="countTravelers">0</b><span>Travellers</span></div>
+                    <div class="tile"><b id="countGuides">0</b><span>Guides</span></div>
+                    <div class="tile"><b id="countPartners">0</b><span>Service Providers</span></div>
+                    <div class="tile"><b id="countPending">0</b><span>Waiting</span></div>
+                </div>
+
+                <div class="split">
+                    <div class="box">
+                        <h2>All accounts</h2>
+                        <div class="toolbar">
+                            <label for="accSearch" class="hidden">Search</label>
+                            <input type="text" id="accSearch" placeholder="Search name, username or email">
+                            <label for="roleFilter" class="hidden">Role</label>
+                            <select id="roleFilter">
+                                <option value="">All roles</option>
+                                <option value="admin">Admin</option>
+                                <option value="traveler">Traveller</option>
+                                <option value="guide">Guide</option>
+                                <option value="provider">Service Provider</option>
+                            </select>
+                            <label for="statusFilter" class="hidden">Status</label>
+                            <select id="statusFilter">
+                                <option value="">All status</option>
+                                <option>Active</option>
+                                <option>Pending</option>
+                                <option>Suspended</option>
+                                <option>Rejected</option>
+                            </select>
+                        </div>
+                        <p class="muted" id="accCount"></p>
+                        <div class="table-scroll">
+                            <table class="grid-table">
+                                <thead>
+                                    <tr><th>Name</th><th>Username</th><th>Role</th><th>Status</th><th>Joined</th><th></th></tr>
+                                </thead>
+                                <tbody id="accRows"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <form class="box" id="accountForm" novalidate>
+                        <h2 id="accFormTitle">Add an account</h2>
+
+                        <div class="field">
+                            <label for="accName">Full name</label>
+                            <input type="text" id="accName">
+                            <small class="field-error" id="accNameError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="accUser">Username</label>
+                            <input type="text" id="accUser">
+                            <small class="field-error" id="accUserError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="accEmail">Email</label>
+                            <input type="email" id="accEmail">
+                            <small class="field-error" id="accEmailError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="accPass">Password</label>
+                            <input type="text" id="accPass" placeholder="at least 6 characters">
+                            <small class="field-error" id="accPassError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="accRole">Role</label>
+                            <select id="accRole">
+                                <option value="">Choose a role</option>
+                                <option value="admin">Admin</option>
+                                <option value="traveler">Traveller</option>
+                                <option value="guide">Guide</option>
+                                <option value="provider">Service Provider</option>
+                            </select>
+                            <small class="field-error" id="accRoleError"></small>
+                        </div>
+                        <div class="field">
+                            <span class="label">Status</span>
+                            <label class="check"><input type="radio" name="accStatus" value="Active" checked> Active</label>
+                            <label class="check"><input type="radio" name="accStatus" value="Pending"> Pending</label>
+                            <label class="check"><input type="radio" name="accStatus" value="Suspended"> Suspended</label>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-coral" id="accSaveBtn">Add account</button>
+                            <button type="button" class="btn btn-light" id="accCancelBtn">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="panel hidden" id="panelApprovals">
+                <div class="split">
+                    <div>
+                        <div class="box">
+                            <h2>Waiting for approval</h2>
+                            <div id="waitingList"></div>
+                        </div>
+                        <div class="box">
+                            <h2>Decision history</h2>
+                            <div id="historyList"></div>
+                        </div>
+                    </div>
+
+                    <form class="box" id="decisionForm" novalidate>
+                        <h2>Make a decision</h2>
+                        <div class="field">
+                            <label for="pickAccount">Account</label>
+                            <select id="pickAccount"></select>
+                            <small class="field-error" id="pickAccountError"></small>
+                        </div>
+                        <div class="field" id="decisionBox">
+                            <span class="label">Decision</span>
+                            <label class="check"><input type="radio" name="decision" value="Approved"> Approve</label>
+                            <label class="check"><input type="radio" name="decision" value="Rejected"> Reject</label>
+                            <small class="field-error" id="decisionBoxError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="reason">Note / reason <span class="counter" id="reasonCount">0 / 150</span></label>
+                            <textarea id="reason" rows="4" maxlength="150" placeholder="Required when you reject"></textarea>
+                            <small class="field-error" id="reasonError"></small>
+                        </div>
+                        <button type="submit" class="btn btn-plum">Save decision</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="panel hidden" id="panelTickets">
+                <div class="tiles">
+                    <div class="tile"><b id="tOpen">0</b><span>Open</span></div>
+                    <div class="tile"><b id="tProgress">0</b><span>In progress</span></div>
+                    <div class="tile"><b id="tResolved">0</b><span>Resolved</span></div>
+                    <div class="tile"><b id="tHigh">0</b><span>High priority open</span></div>
+                </div>
+
+                <div class="box">
+                    <div class="toolbar">
+                        <label for="ticketSearch" class="hidden">Search</label>
+                        <input type="text" id="ticketSearch" placeholder="Search subject or user">
+                        <label for="ticketStatus" class="hidden">Status</label>
+                        <select id="ticketStatus">
+                            <option value="">Any status</option>
+                            <option>Open</option>
+                            <option>In Progress</option>
+                            <option>Resolved</option>
+                        </select>
+                        <label for="ticketPriority" class="hidden">Priority</label>
+                        <select id="ticketPriority">
+                            <option value="">Any priority</option>
+                            <option>High</option>
+                            <option>Medium</option>
+                            <option>Low</option>
+                        </select>
+                    </div>
+                    <div id="ticketList"></div>
+                </div>
+            </section>
+
+            <section class="panel hidden" id="panelPromos">
+                <div class="split">
+                    <div>
+                        <div class="box">
+                            <h2>All promo codes</h2>
+                            <div class="table-scroll">
+                                <table class="grid-table">
+                                    <thead>
+                                        <tr><th>Code</th><th>Off</th><th>Valid</th><th>State</th><th></th></tr>
+                                    </thead>
+                                    <tbody id="promoRows"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <form class="box" id="testForm" novalidate>
+                            <h2>Try a code</h2>
+                            <div class="two-col">
+                                <div class="field">
+                                    <label for="testCode">Code</label>
+                                    <input type="text" id="testCode" placeholder="WINTER25">
+                                    <small class="field-error" id="testCodeError"></small>
+                                </div>
+                                <div class="field">
+                                    <label for="testAmount">Booking amount (৳)</label>
+                                    <input type="number" id="testAmount" min="1" placeholder="10000">
+                                    <small class="field-error" id="testAmountError"></small>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-light">Check</button>
+                            <p class="result-line hidden" id="testResult"></p>
+                        </form>
+                    </div>
+
+                    <form class="box" id="promoForm" novalidate>
+                        <h2>New promo code</h2>
+                        <div class="field">
+                            <label for="promoCode">Code</label>
+                            <input type="text" id="promoCode" placeholder="CAPITAL letters + numbers">
+                            <small class="field-error" id="promoCodeError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="promoPercent">Discount (%)</label>
+                            <input type="number" id="promoPercent" min="5" max="50" placeholder="5 - 50">
+                            <small class="field-error" id="promoPercentError"></small>
+                        </div>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="promoFrom">Starts</label>
+                                <input type="date" id="promoFrom">
+                                <small class="field-error" id="promoFromError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="promoTo">Ends</label>
+                                <input type="date" id="promoTo">
+                                <small class="field-error" id="promoToError"></small>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="promoNote">Note</label>
+                            <input type="text" id="promoNote" placeholder="e.g. Victory day offer">
+                        </div>
+                        <button type="submit" class="btn btn-coral">Add code</button>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="scripts/records.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/admin.js"></script>
+</body>
+</html>
