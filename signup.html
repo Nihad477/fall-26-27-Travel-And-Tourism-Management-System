@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a TRAVESTRO account as a traveller, tour guide or service provider">
+    <title>Create account | TRAVESTRO</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <aside class="auth-side">
+            <img src="images/side-traveller.jpg" alt="Traveller with a backpack at the beach" class="side-photo"
+                id="sidePhoto">
+            <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+        </aside>
+
+        <main class="auth-main">
+            <div class="auth-box">
+                <h1>Create account</h1>
+                <p class="muted">Travellers can start right away. Tour guides and service providers need admin approval
+                    first. Admin accounts cannot be created here.</p>
+
+                <div id="signupNotice" class="notice hidden"></div>
+
+                <form id="signupForm" method="get" novalidate>
+
+                    <p class="field"><span class="label">I want to join as</span></p>
+                    <div class="role-picker" id="rolePicker">
+                        <label class="role-option">
+                            <input type="radio" name="role" value="traveler">
+                            <strong>Traveller</strong><br>Book tours
+                        </label>
+                        <label class="role-option">
+                            <input type="radio" name="role" value="guide">
+                            <strong>Tour Guide</strong><br>Lead tours
+                        </label>
+                        <label class="role-option">
+                            <input type="radio" name="role" value="provider">
+                            <strong>Service Provider</strong><br>Hotel or transport
+                        </label>
+                    </div>
+                    <small class="field-error" id="rolePickerError"></small>
+
+                    <fieldset>
+                        <legend>About you</legend>
+
+                        <div class="field">
+                            <label for="fullName">Full name</label>
+                            <input type="text" id="fullName" placeholder="e.g. Tarannum Afrin Afia">
+                            <small class="field-error" id="fullNameError"></small>
+                        </div>
+
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="userName">Username</label>
+                                <input type="text" id="userName" placeholder="letters, numbers, _">
+                                <small class="field-error" id="userNameError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="you@mail.com">
+                                <small class="field-error" id="emailError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="phone">Mobile number</label>
+                                <input type="tel" id="phone" placeholder="01XXXXXXXXX">
+                                <small class="field-error" id="phoneError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="birthDate">Date of birth</label>
+                                <input type="date" id="birthDate">
+                                <small class="field-error" id="birthDateError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" placeholder="8+ characters">
+                                <div class="strength">
+                                    <div class="strength-fill" id="strengthFill"></div>
+                                </div>
+                                <small class="muted" id="strengthText">Use letters, numbers and a symbol</small>
+                                <small class="field-error" id="passwordError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="confirmPass">Confirm password</label>
+                                <input type="password" id="confirmPass" placeholder="Type it again">
+                                <small class="field-error" id="confirmPassError"></small>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="travelerPart" class="hidden">
+                        <legend>Traveller details</legend>
+                        <div class="field">
+                            <label for="homeCity">Home city</label>
+                            <select id="homeCity">
+                                <option value="">Choose a city</option>
+                                <option>Dhaka</option>
+                                <option>Chattogram</option>
+                                <option>Sylhet</option>
+                                <option>Khulna</option>
+                                <option>Rajshahi</option>
+                                <option>Barishal</option>
+                                <option>Rangpur</option>
+                                <option>Mymensingh</option>
+                            </select>
+                            <small class="field-error" id="homeCityError"></small>
+                        </div>
+                        <div class="field" id="tripTypes">
+                            <span class="label">Trips I like (pick at least one)</span>
+                            <label class="check"><input type="checkbox" name="tripType" value="Nature"> Nature</label>
+                            <label class="check"><input type="checkbox" name="tripType" value="Beach"> Beach</label>
+                            <label class="check"><input type="checkbox" name="tripType" value="Adventure">
+                                Adventure</label>
+                            <label class="check"><input type="checkbox" name="tripType" value="Heritage">
+                                Heritage</label>
+                            <small class="field-error" id="tripTypesError"></small>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="guidePart" class="hidden">
+                        <legend>Tour guide details</legend>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="licenseNo">Guide licence no.</label>
+                                <input type="text" id="licenseNo" placeholder="TG-12345">
+                                <small class="field-error" id="licenseNoError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="yearsExp">Years of experience</label>
+                                <input type="number" id="yearsExp" min="0" max="40" placeholder="0 - 40">
+                                <small class="field-error" id="yearsExpError"></small>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="region">Main region</label>
+                            <select id="region">
+                                <option value="">Choose a region</option>
+                                <option>Sylhet division</option>
+                                <option>Chattogram hill tracts</option>
+                                <option>Cox's Bazar coast</option>
+                                <option>Sundarbans</option>
+                                <option>Dhaka city</option>
+                            </select>
+                            <small class="field-error" id="regionError"></small>
+                        </div>
+                        <div class="field" id="languages">
+                            <span class="label">Languages (pick at least one)</span>
+                            <label class="check"><input type="checkbox" name="language" value="Bangla"> Bangla</label>
+                            <label class="check"><input type="checkbox" name="language" value="English"> English</label>
+                            <label class="check"><input type="checkbox" name="language" value="Hindi"> Hindi</label>
+                            <label class="check"><input type="checkbox" name="language" value="Chinese"> Chinese</label>
+                            <small class="field-error" id="languagesError"></small>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="providerPart" class="hidden">
+                        <legend>Service provider details</legend>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="businessName">Business name</label>
+                                <input type="text" id="businessName" placeholder="e.g. Royal Beach Resort">
+                                <small class="field-error" id="businessNameError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="tradeNo">Trade licence no.</label>
+                                <input type="text" id="tradeNo" placeholder="TRD-123456">
+                                <small class="field-error" id="tradeNoError"></small>
+                            </div>
+                        </div>
+                        <div class="field" id="partnerType">
+                            <span class="label">We offer</span>
+                            <label class="check"><input type="radio" name="offer" value="Hotel"> Hotel / Resort</label>
+                            <label class="check"><input type="radio" name="offer" value="Transport"> Bus / Ship</label>
+                            <label class="check"><input type="radio" name="offer" value="Both"> Both</label>
+                            <small class="field-error" id="partnerTypeError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="address">Business address</label>
+                            <textarea id="address" rows="2" placeholder="Road, area, city"></textarea>
+                            <small class="field-error" id="addressError"></small>
+                        </div>
+                    </fieldset>
+
+                    <div class="field" id="agreeBox">
+                        <label class="check"><input type="checkbox" id="agree"> I agree to the TRAVESTRO terms and
+                            privacy policy</label>
+                        <small class="field-error" id="agreeBoxError"></small>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-coral">Create my account</button>
+                        <button type="reset" class="btn btn-light" id="resetBtn">Start over</button>
+                    </div>
+                </form>
+
+                <p class="switch-line">Already a member? <a href="signin.html">Sign in</a></p>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="scripts/records.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/signup.js"></script>
+</body>
+
+</html>
