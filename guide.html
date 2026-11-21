@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TRAVESTRO tour guide dashboard">
+    <title>Tour Guide | TRAVESTRO</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="dash">
+
+    <aside class="sidebar">
+        <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+
+        <div class="profile">
+            <span class="avatar">KK</span>
+            <div><strong>KARIMA KHATUN</strong><small>Tour Guide</small></div>
+        </div>
+
+        <button type="button" class="menu-link current" data-panel="panelTours">My Tours</button>
+        <button type="button" class="menu-link" data-panel="panelPlan">Itinerary Builder</button>
+        <button type="button" class="menu-link" data-panel="panelReviews">Review Inbox</button>
+        <button type="button" class="menu-link" data-panel="panelEarnings">Earnings</button>
+
+        <a href="signin.html" class="signout">&larr; Sign out</a>
+    </aside>
+
+    <div class="workspace">
+        <header class="topbar">
+            <h1 id="panelTitle">My Tours</h1>
+            <span class="muted" id="todayText"></span>
+        </header>
+
+        <main>
+
+
+            <section class="panel" id="panelTours">
+                <div class="split">
+                    <div>
+                        <div class="toolbar">
+                            <label for="tourSearch" class="hidden">Search</label>
+                            <input type="text" id="tourSearch" placeholder="Search tour name or city">
+                            <label for="tagFilter" class="hidden">Type</label>
+                            <select id="tagFilter">
+                                <option value="">All types</option>
+                                <option>Nature</option>
+                                <option>Beach</option>
+                                <option>Adventure</option>
+                                <option>Heritage</option>
+                            </select>
+                            <label for="levelFilter" class="hidden">Level</label>
+                            <select id="levelFilter">
+                                <option value="">All levels</option>
+                                <option>Easy</option>
+                                <option>Medium</option>
+                                <option>Tough</option>
+                            </select>
+                        </div>
+                        <p class="muted" id="tourCount"></p>
+                        <div class="tour-grid" id="tourCards"></div>
+                    </div>
+
+                    <form class="box" id="tourForm" novalidate>
+                        <h2 id="tourFormTitle">Publish a tour</h2>
+                        <div class="field">
+                            <label for="tourName">Tour name</label>
+                            <input type="text" id="tourName" placeholder="e.g. Ratargul Swamp Day">
+                            <small class="field-error" id="tourNameError"></small>
+                        </div>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="tourCity">City</label>
+                                <select id="tourCity">
+                                    <option value="">Choose</option>
+                                    <option>Sreemangal</option>
+                                    <option>Sylhet</option>
+                                    <option>Saint Martin</option>
+                                    <option>Cox's Bazar</option>
+                                    <option>Bandarban</option>
+                                    <option>Rangamati</option>
+                                    <option>Sundarbans</option>
+                                    <option>Dhaka</option>
+                                </select>
+                                <small class="field-error" id="tourCityError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="tourTag">Type</label>
+                                <select id="tourTag">
+                                    <option value="">Choose</option>
+                                    <option>Nature</option>
+                                    <option>Beach</option>
+                                    <option>Adventure</option>
+                                    <option>Heritage</option>
+                                </select>
+                                <small class="field-error" id="tourTagError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="tourDays">Days</label>
+                                <input type="number" id="tourDays" min="1" max="15">
+                                <small class="field-error" id="tourDaysError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="tourSeats">Seats</label>
+                                <input type="number" id="tourSeats" min="1" max="40">
+                                <small class="field-error" id="tourSeatsError"></small>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="tourPrice">Price per person (TK)</label>
+                            <input type="number" id="tourPrice" min="500" max="100000">
+                            <small class="field-error" id="tourPriceError"></small>
+                        </div>
+                        <div class="field">
+                            <span class="label">Level</span>
+                            <label class="check"><input type="radio" name="tourLevel" value="Easy" checked> Easy</label>
+                            <label class="check"><input type="radio" name="tourLevel" value="Medium"> Medium</label>
+                            <label class="check"><input type="radio" name="tourLevel" value="Tough"> Tough</label>
+                        </div>
+                        <div class="field">
+                            <label for="tourSummary">Short summary <span class="counter" id="summaryCount">0 /
+                                    250</span></label>
+                            <textarea id="tourSummary" rows="3" maxlength="250"></textarea>
+                            <small class="field-error" id="tourSummaryError"></small>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-coral" id="tourSaveBtn">Publish tour</button>
+                            <button type="button" class="btn btn-light" id="tourCancelBtn">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+
+            <section class="panel hidden" id="panelPlan">
+                <div class="split">
+                    <div class="box">
+                        <div class="field">
+                            <label for="planTour">Tour</label>
+                            <span id="planTourHolder"></span>
+                        </div>
+                        <p class="muted" id="planInfo"></p>
+                        <div class="timeline" id="planTimeline"></div>
+                    </div>
+
+                    <form class="box" id="planForm" novalidate>
+                        <h2>Add a stop</h2>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="planDay">Day</label>
+                                <input type="number" id="planDay" min="1" value="1">
+                                <small class="field-error" id="planDayError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="planTime">Time</label>
+                                <input type="time" id="planTime">
+                                <small class="field-error" id="planTimeError"></small>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="planActivity">Activity</label>
+                            <input type="text" id="planActivity" placeholder="e.g. Lunch at a local restaurant">
+                            <small class="field-error" id="planActivityError"></small>
+                        </div>
+                        <button type="submit" class="btn btn-coral">Add to plan</button>
+                    </form>
+                </div>
+            </section>
+
+
+            <section class="panel hidden" id="panelReviews">
+                <div class="tiles">
+                    <div class="tile"><b id="avgScore">0.0</b><span>Average rating</span></div>
+                    <div class="tile"><b id="reviewTotal">0</b><span>Reviews</span></div>
+                    <div class="tile"><b id="needReply">0</b><span>Need a reply</span></div>
+                </div>
+
+                <div class="box">
+                    <div class="toolbar">
+                        <label for="replyFilter" class="hidden">Show</label>
+                        <select id="replyFilter">
+                            <option value="all">All reviews</option>
+                            <option value="todo">Needs reply</option>
+                            <option value="done">Replied</option>
+                        </select>
+                        <label for="starFilter" class="hidden">Stars</label>
+                        <select id="starFilter">
+                            <option value="0">Any rating</option>
+                            <option value="5">5 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="3">3 stars</option>
+                            <option value="2">2 stars</option>
+                            <option value="1">1 star</option>
+                        </select>
+                    </div>
+                    <div id="reviewList"></div>
+                </div>
+            </section>
+
+
+            <section class="panel hidden" id="panelEarnings">
+                <div class="tiles">
+                    <div class="tile"><b id="earnTotal">TK0</b><span>My earnings (80%)</span></div>
+                    <div class="tile"><b id="earnTrips">0</b><span>Trips</span></div>
+                    <div class="tile"><b id="earnPeople">0</b><span>Travellers guided</span></div>
+                </div>
+
+                <div class="box">
+                    <div class="toolbar">
+                        <label for="monthFilter" class="hidden">Month</label>
+                        <select id="monthFilter"></select>
+                        <label for="earnStatus" class="hidden">Status</label>
+                        <select id="earnStatus">
+                            <option value="">Confirmed + completed</option>
+                            <option>Confirmed</option>
+                            <option>Completed</option>
+                        </select>
+                    </div>
+                    <div class="table-scroll">
+                        <table class="grid-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Tour</th>
+                                    <th>Traveller</th>
+                                    <th>People</th>
+                                    <th>Trip value</th>
+                                    <th>My share</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="earnRows"></tbody>
+                        </table>
+                    </div>
+                    <p class="muted">TRAVESTRO keeps 20% as a service fee. Requested trips are not counted until they
+                        are confirmed.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="scripts/records.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/guide.js"></script>
+</body>
+
+</html>

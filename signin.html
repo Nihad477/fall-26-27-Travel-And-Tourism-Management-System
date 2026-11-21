@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to TRAVESTRO">
+    <title>Sign in | TRAVESTRO</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <div class="auth-page">
+
+        <aside class="auth-side">
+            <img src="images/side-signin.jpg" alt="Backpack on a mountain top" class="side-photo">
+            <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+        </aside>
+
+        <main class="auth-main">
+            <div class="auth-box">
+                <h1>Sign in</h1>
+                <p class="muted">Use your username or your email address.</p>
+
+                <div id="signinNotice" class="notice hidden"></div>
+
+                <form id="signinForm" method="get" novalidate>
+                    <div class="field">
+                        <label for="loginId">Username or email</label>
+                        <input type="text" id="loginId" placeholder="e.g. traveler">
+                        <small class="field-error" id="loginIdError"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="loginPass">Password</label>
+                        <input type="password" id="loginPass" placeholder="Your password">
+                        <small class="field-error" id="loginPassError"></small>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-coral">Sign in</button>
+                        <button type="button" id="peekBtn" class="btn btn-light">Show password</button>
+                        <a href="index.html" class="btn btn-ghost">Back to home</a>
+                    </div>
+                </form>
+
+                <p class="switch-line">New here? <a href="signup.html">Create an account</a></p>
+
+                <div class="demo-list">
+                    <strong>Demo accounts</strong>
+                    <ul>
+                        <li>Admin: <code>admin</code> / <code>travestro1</code></li>
+                        <li>Traveller: <code>traveler</code> / <code>traveler1</code></li>
+                        <li>Tour Guide: <code>guide</code> / <code>guide1234</code></li>
+                        <li>Service Provider: <code>provider</code> / <code>provider1</code></li>
+                        <li>Tour Guide, waiting for approval: <code>mehedi_guide</code> / <code>guide1234</code></li>
+                        <li>Service Provider, waiting for approval: <code>whiteorchid</code> / <code>provider1</code></li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="scripts/records.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/signin.js"></script>
+</body>
+</html>
