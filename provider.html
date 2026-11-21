@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TRAVESTRO service provider dashboard for hotels and transport">
+    <title>Service Provider | TRAVESTRO</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="dash">
+
+    <aside class="sidebar">
+        <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+
+        <div class="profile">
+            <span class="avatar">RB</span>
+            <div><strong>Royal Beach Resort</strong><small>Service Provider</small></div>
+        </div>
+
+        <button type="button" class="menu-link current" data-panel="panelStays">My Rooms</button>
+        <button type="button" class="menu-link" data-panel="panelRequests">Booking Requests</button>
+        <button type="button" class="menu-link" data-panel="panelCalendar">Room Calendar</button>
+        <button type="button" class="menu-link" data-panel="panelSeats">Bus Seat Map</button>
+
+        <a href="signin.html" class="signout">&larr; Sign out</a>
+    </aside>
+
+    <div class="workspace">
+        <header class="topbar">
+            <h1 id="panelTitle">My Rooms</h1>
+            <span class="muted" id="todayText"></span>
+        </header>
+
+        <main>
+
+            <section class="panel" id="panelStays">
+                <div class="split">
+                    <div class="box">
+                        <h2>Rooms I offer</h2>
+                        <div class="toolbar">
+                            <label for="staySearch" class="hidden">Search</label>
+                            <input type="text" id="staySearch" placeholder="Search room name or facility">
+                            <label for="typeFilter" class="hidden">Type</label>
+                            <select id="typeFilter">
+                                <option value="">All types</option>
+                                <option>Standard</option>
+                                <option>Deluxe</option>
+                                <option>Suite</option>
+                                <option>Cottage</option>
+                            </select>
+                            <label for="openFilter" class="hidden">Status</label>
+                            <select id="openFilter">
+                                <option value="">Open + closed</option>
+                                <option>Open</option>
+                                <option>Closed</option>
+                            </select>
+                        </div>
+                        <p class="muted" id="stayCount"></p>
+                        <div class="table-scroll">
+                            <table class="grid-table">
+                                <thead>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Price / night</th>
+                                        <th>Guests</th>
+                                        <th>Facilities</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stayRows"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <form class="box" id="stayForm" novalidate>
+                        <h2 id="stayFormTitle">List a new room</h2>
+                        <div class="field">
+                            <label for="stayTitle">Room name</label>
+                            <input type="text" id="stayTitle" placeholder="e.g. Hill View Double">
+                            <small class="field-error" id="stayTitleError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="stayType">Room type</label>
+                            <select id="stayType">
+                                <option value="">Choose</option>
+                                <option>Standard</option>
+                                <option>Deluxe</option>
+                                <option>Suite</option>
+                                <option>Cottage</option>
+                            </select>
+                            <small class="field-error" id="stayTypeError"></small>
+                        </div>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="stayPrice">Price / night (৳)</label>
+                                <input type="number" id="stayPrice" min="500" max="50000">
+                                <small class="field-error" id="stayPriceError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="stayGuests">Max guests</label>
+                                <input type="number" id="stayGuests" min="1" max="8">
+                                <small class="field-error" id="stayGuestsError"></small>
+                            </div>
+                        </div>
+                        <div class="field" id="facilityBox">
+                            <span class="label">Facilities</span>
+                            <label class="check"><input type="checkbox" name="facility" value="AC"> AC</label>
+                            <label class="check"><input type="checkbox" name="facility" value="WiFi"> WiFi</label>
+                            <label class="check"><input type="checkbox" name="facility" value="Sea View"> Sea
+                                View</label>
+                            <label class="check"><input type="checkbox" name="facility" value="Kitchen"> Kitchen</label>
+                            <label class="check"><input type="checkbox" name="facility" value="Garden"> Garden</label>
+                            <small class="field-error" id="facilityBoxError"></small>
+                        </div>
+                        <div class="field">
+                            <span class="label">Status</span>
+                            <label class="check"><input type="radio" name="stayStatus" value="Open" checked> Open for
+                                booking</label>
+                            <label class="check"><input type="radio" name="stayStatus" value="Closed"> Closed</label>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-coral" id="staySaveBtn">Add room</button>
+                            <button type="button" class="btn btn-light" id="stayCancelBtn">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="panel hidden" id="panelRequests">
+                <div class="tiles">
+                    <div class="tile"><b id="rWaiting">0</b><span>Waiting</span></div>
+                    <div class="tile"><b id="rAccepted">0</b><span>Accepted</span></div>
+                    <div class="tile"><b id="rDeclined">0</b><span>Declined</span></div>
+                    <div class="tile"><b id="rIncome">৳0</b><span>Accepted value</span></div>
+                </div>
+
+                <div class="box">
+                    <p class="muted">A request can be accepted only if the room is open, big enough, and free on those
+                        nights. Accepting blocks the nights in the room calendar.</p>
+                    <div class="toolbar">
+                        <label for="reqSearch" class="hidden">Search</label>
+                        <input type="text" id="reqSearch" placeholder="Search guest or room">
+                        <label for="reqFilter" class="hidden">Status</label>
+                        <select id="reqFilter">
+                            <option value="">All requests</option>
+                            <option>Waiting</option>
+                            <option>Accepted</option>
+                            <option>Declined</option>
+                        </select>
+                    </div>
+                    <div class="table-scroll">
+                        <table class="grid-table">
+                            <thead>
+                                <tr>
+                                    <th>Guest</th>
+                                    <th>Room</th>
+                                    <th>Check-in</th>
+                                    <th>Nights</th>
+                                    <th>Guests</th>
+                                    <th>Bill</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="reqRows"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel hidden" id="panelCalendar">
+                <div class="box">
+                    <div class="item-row">
+                        <h2 id="weekLabel">This week</h2>
+                        <span class="form-buttons">
+                            <button type="button" class="btn btn-light btn-mini" id="prevWeek">&larr; Previous
+                                week</button>
+                            <button type="button" class="btn btn-light btn-mini" id="thisWeek">Today</button>
+                            <button type="button" class="btn btn-light btn-mini" id="nextWeek">Next week &rarr;</button>
+                        </span>
+                    </div>
+                    <p class="muted">Click a night to block it (for repairs or walk-in guests) or to free it again.</p>
+                    <div class="table-scroll">
+                        <table class="grid-table">
+                            <thead id="calHead"></thead>
+                            <tbody id="calBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="calSummary"></p>
+                </div>
+            </section>
+
+            <section class="panel hidden" id="panelSeats">
+                <div class="split">
+                    <div class="box">
+                        <div class="field">
+                            <label for="busSelect">Departure</label>
+                            <select id="busSelect"></select>
+                        </div>
+                        <p id="busInfo"></p>
+                        <p class="legend">
+                            <span class="tag green">Free</span>
+                            <span class="tag amber">Selected</span>
+                            <span class="tag red">Sold</span>
+                        </p>
+                        <div class="bus">
+                            <p class="muted">Driver &#9655;</p>
+                            <div class="seat-grid" id="seatGrid"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="tiles">
+                            <div class="tile"><b id="seatsLeft">0</b><span>Seats left</span></div>
+                            <div class="tile"><b id="seatSales">৳0</b><span>Ticket sales</span></div>
+                        </div>
+
+                        <form class="box" id="ticketForm" novalidate>
+                            <h2>Sell tickets</h2>
+                            <p>Selected seats: <strong id="pickedText">none</strong></p>
+                            <small class="field-error" id="seatGridError"></small>
+                            <div class="field">
+                                <label for="passenger">Passenger name</label>
+                                <input type="text" id="passenger" placeholder="e.g. Tarannum Afrin Afia">
+                                <small class="field-error" id="passengerError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="passPhone">Passenger mobile</label>
+                                <input type="tel" id="passPhone" placeholder="01XXXXXXXXX">
+                                <small class="field-error" id="passPhoneError"></small>
+                            </div>
+                            <p class="notice good" id="fareLine">Fare: ৳0</p>
+                            <div class="form-buttons">
+                                <button type="submit" class="btn btn-coral">Confirm tickets</button>
+                                <button type="button" class="btn btn-light" id="clearSeats">Clear selection</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="scripts/records.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/provider.js"></script>
+</body>
+
+</html>
