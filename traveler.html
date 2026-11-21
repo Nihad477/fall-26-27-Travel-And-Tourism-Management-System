@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Traveller | TRAVESTRO</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body class="dash">
 
     <aside class="sidebar">
@@ -33,7 +35,7 @@
 
         <main>
 
-            <!-- ========== PANEL 1: My Trips (CRUD + Search) ========== -->
+
             <section class="panel" id="panelTrips">
                 <div class="tiles">
                     <div class="tile"><b id="nRequested">0</b><span>Requested</span></div>
@@ -44,7 +46,8 @@
                 <div class="split">
                     <div class="box">
                         <h2>My trip requests</h2>
-                        <p class="muted">Only <strong>Requested</strong> trips can be changed or deleted. Confirmed trips are locked.</p>
+                        <p class="muted">Only <strong>Requested</strong> trips can be changed or deleted. Confirmed
+                            trips are locked.</p>
                         <div class="toolbar">
                             <label for="tripSearch" class="hidden">Search</label>
                             <input type="text" id="tripSearch" placeholder="Search tour or city">
@@ -59,7 +62,14 @@
                         <div class="table-scroll">
                             <table class="grid-table">
                                 <thead>
-                                    <tr><th>Tour</th><th>Start</th><th>People</th><th>Cost</th><th>Status</th><th></th></tr>
+                                    <tr>
+                                        <th>Tour</th>
+                                        <th>Start</th>
+                                        <th>People</th>
+                                        <th>Cost</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody id="tripRows"></tbody>
                             </table>
@@ -91,8 +101,10 @@
                             <small class="field-error" id="tripPhoneError"></small>
                         </div>
                         <div class="field">
-                            <label for="tripNote">Note for the guide <span class="counter" id="noteCount">0 / 150</span></label>
-                            <textarea id="tripNote" rows="3" maxlength="150" placeholder="Food, pickup point, anything else"></textarea>
+                            <label for="tripNote">Note for the guide <span class="counter" id="noteCount">0 /
+                                    150</span></label>
+                            <textarea id="tripNote" rows="3" maxlength="150"
+                                placeholder="Food, pickup point, anything else"></textarea>
                         </div>
                         <p class="notice good" id="tripEstimate">Pick a tour to see the cost.</p>
                         <div class="form-buttons">
@@ -103,7 +115,7 @@
                 </div>
             </section>
 
-            <!-- ========== PANEL 2: Wishlist Board ========== -->
+
             <section class="panel hidden" id="panelWishlist">
                 <form class="box" id="wishForm" novalidate>
                     <h2>Add a dream place</h2>
@@ -140,7 +152,7 @@
                 </div>
             </section>
 
-            <!-- ========== PANEL 3: Expense Splitter ========== -->
+
             <section class="panel hidden" id="panelSplitter">
                 <div class="split">
                     <div>
@@ -148,7 +160,14 @@
                             <h2>Group expenses</h2>
                             <div class="table-scroll">
                                 <table class="grid-table">
-                                    <thead><tr><th>What</th><th>Amount</th><th>Paid by</th><th></th></tr></thead>
+                                    <thead>
+                                        <tr>
+                                            <th>What</th>
+                                            <th>Amount</th>
+                                            <th>Paid by</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
                                     <tbody id="expenseRows"></tbody>
                                 </table>
                             </div>
@@ -199,7 +218,7 @@
                 </div>
             </section>
 
-            <!-- ========== PANEL 4: Currency Converter ========== -->
+
             <section class="panel hidden" id="panelConverter">
                 <div class="split">
                     <form class="box" id="convertForm" novalidate>
@@ -231,7 +250,12 @@
                         <h2>Today's sample rates</h2>
                         <p class="muted">Taka for 1 unit. These are fixed sample numbers for the prototype.</p>
                         <table class="grid-table">
-                            <thead><tr><th>Currency</th><th>1 unit =</th></tr></thead>
+                            <thead>
+                                <tr>
+                                    <th>Currency</th>
+                                    <th>1 unit =</th>
+                                </tr>
+                            </thead>
                             <tbody id="rateRows"></tbody>
                         </table>
                     </div>
@@ -247,4 +271,5 @@
     <script src="scripts/helpers.js"></script>
     <script src="scripts/traveler.js"></script>
 </body>
+
 </html>
