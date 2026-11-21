@@ -10,7 +10,7 @@ TRAVESTRO is a frontend prototype that connects **travellers**, **tour guides**,
 2. Open `index.html` in Chrome or Firefox, or use the **Live Server** extension in VS Code.
 3. Click **Sign in** and use one of the demo accounts below.
 
-> All data lives in JavaScript arrays inside `scripts/records.js`. Anything you add, edit or delete stays only while the page is open; reloading a page brings back the sample data.
+> All data lives in JavaScript arrays inside `js/records.js`. Anything you add, edit or delete stays only while the page is open; reloading a page brings back the sample data.
 
 ## Demo accounts
 
@@ -61,15 +61,15 @@ Every user can **Create, Read, Update, Delete and Search** their own records, an
 ├── traveler.html
 ├── guide.html
 ├── provider.html
-├── images/            Postcard and side-panel photos (sign-up photo changes with the chosen role)
-├── styles/
+├── image/            Postcard and side-panel photos (sign-up photo changes with the chosen role)
+├── css/
 │   └── style.css      The only stylesheet
-├── scripts/
+├── js/
 │   ├── records.js     Sample data (arrays of objects)
 │   ├── helpers.js     Shared functions (validation, dates, toast, sidebar)
 │   ├── home.js  signin.js  signup.js
 │   └── admin.js  traveler.js  guide.js  provider.js
-└── project-evaluation/   CO3 forms
+└── doc/   CO3 forms
 ```
 
 Every page loads `records.js`, then `helpers.js`, then its own script, at the end of `<body>`.
@@ -79,7 +79,7 @@ Every page loads `records.js`, then `helpers.js`, then its own script, at the en
 Everything follows the techniques used in the course demo project (Weeks 1–6).
 
 - **HTML pages and forms:** semantic tags (`header`, `nav`, `main`, `section`, `aside`, `footer`, `article`); `fieldset` and `legend`; `label for`; input types text, email, password, tel, number, date, time, radio and checkbox; `select`; `textarea`.
-- **CSS:** one external stylesheet (`styles/style.css`); element, class and id selectors; box model; Grid and Flexbox; `border-radius`, `box-shadow`, `transition`, `transform`; `:hover` and `:focus`; media queries for phones.
+- **CSS:** one external stylesheet (`css/style.css`); element, class and id selectors; box model; Grid and Flexbox; `border-radius`, `box-shadow`, `transition`, `transform`; `:hover` and `:focus`; media queries for phones.
 - **Code structure:** HTML, CSS and JS in separate files; one script per page plus the shared `records.js` (data) and `helpers.js` (common functions). Scripts load at the end of `<body>`.
 - **JavaScript basics:** `let` / `const`, functions with `return`, `if / else`, `switch` (sign-in redirect, role names, ticket counts), `for` loops, arrays of objects with `push`, `slice` + `concat` (to delete), `indexOf` and `join`.
 - **Events:** forms use `onsubmit` with `return false` (set in the page's script); `addEventListener("click" / "keyup" / "change", namedFunction)`; `onclick` on buttons created in tables.

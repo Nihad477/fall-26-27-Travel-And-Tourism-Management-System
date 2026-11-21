@@ -17,15 +17,15 @@ function showRolePart() {
     let photo = document.getElementById("sidePhoto");
     switch (role) {
         case "guide":
-            photo.src = "images/side-guide.jpg";
+            photo.src = "image/side-guide.jpg";
             photo.alt = "Tour guide showing a map to a group";
             break;
         case "provider":
-            photo.src = "images/side-provider.jpg";
+            photo.src = "image/side-provider.jpg";
             photo.alt = "Hotel room with a big bed and a city view";
             break;
         default:
-            photo.src = "images/side-traveller.jpg";
+            photo.src = "image/side-traveller.jpg";
             photo.alt = "Traveller with a backpack at the beach";
     }
 
