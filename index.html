@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TRAVESTRO - find guided tours, stays and transport across Bangladesh">
+    <title>TRAVESTRO | Explore Bangladesh</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header class="site-top">
+        <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+        <nav class="site-links">
+            <a href="#tours">Tours</a>
+            <a href="#how">How it works</a>
+            <a href="#join">Join us</a>
+            <a href="signin.html">Sign in</a>
+            <a href="signup.html" class="btn btn-coral btn-mini">Create account</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <p class="muted">Guided tours &middot; Stays &middot; Transport</p>
+            <h1>Pack light.<br>Travel <em>far</em>.<br>Book it all in one place.</h1>
+            <p>TRAVESTRO connects travellers with trusted local guides, hotels and bus operators from Sylhet to Saint Martin.</p>
+
+            <form id="heroForm" class="hero-search">
+                <label for="heroKeyword" class="hidden">Where to?</label>
+                <input type="text" id="heroKeyword" placeholder="Where do you want to go?">
+                <button type="submit" class="btn btn-coral">Find tours</button>
+            </form>
+        </div>
+
+        <div class="postcards">
+            <div class="postcard one">
+                <img src="images/postcard-sreemangal.jpg" alt="Tea garden in Sreemangal at sunrise">
+                <span class="postcard-label"><strong>Sreemangal</strong>Tea hills</span>
+            </div>
+            <div class="postcard two">
+                <img src="images/postcard-saintmartin.jpg" alt="Boats on the clear sea at Saint Martin">
+                <span class="postcard-label"><strong>Saint Martin</strong>Coral beach</span>
+            </div>
+            <div class="postcard three">
+                <img src="images/postcard-bandarban.jpg" alt="Boat in a green canyon in Bandarban">
+                <span class="postcard-label"><strong>Bandarban</strong>Mountain trek</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="page-wrap">
+
+        <section id="tours">
+            <div class="section-head">
+                <div>
+                    <h2>Find your next escape</h2>
+                    <p class="muted" id="tourCount">0 tours found</p>
+                </div>
+
+                <div class="toolbar">
+                    <label for="tourSearch" class="hidden">Search tours</label>
+                    <input type="text" id="tourSearch" placeholder="Search tour, city or guide">
+
+                    <label for="budgetFilter" class="hidden">Budget</label>
+                    <select id="budgetFilter">
+                        <option value="0">Any budget</option>
+                        <option value="5000">Up to ৳5,000</option>
+                        <option value="10000">Up to ৳10,000</option>
+                        <option value="15000">Up to ৳15,000</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="chips" id="tagChips">
+                <button type="button" class="on" data-tag="All">All</button>
+                <button type="button" data-tag="Nature">Nature</button>
+                <button type="button" data-tag="Beach">Beach</button>
+                <button type="button" data-tag="Adventure">Adventure</button>
+                <button type="button" data-tag="Heritage">Heritage</button>
+            </div>
+            <br>
+
+            <div class="tour-grid" id="tourGrid">
+                <!-- home.js puts tour cards here -->
+            </div>
+        </section>
+
+        <br><br>
+
+        <section id="how">
+            <h2>How TRAVESTRO works</h2>
+            <div class="steps-row">
+                <div class="step-box">
+                    <b>01</b>
+                    <h3>Create an account</h3>
+                    <p>Sign up as a traveller, a tour guide or a hotel and transport service provider.</p>
+                </div>
+                <div class="step-box">
+                    <b>02</b>
+                    <h3>Get verified</h3>
+                    <p>Our admin team checks every new guide and service provider before they go live.</p>
+                </div>
+                <div class="step-box">
+                    <b>03</b>
+                    <h3>Book and go</h3>
+                    <p>Request a tour, track your plans and split the costs with your friends.</p>
+                </div>
+            </div>
+        </section>
+
+        <br><br>
+
+        <section id="join">
+            <h2>One platform, four kinds of people</h2>
+            <div class="roles-strip">
+                <div class="role-box">
+                    <h3>Traveller</h3>
+                    <p>Book tours, keep a wishlist, split group costs and convert currency.</p>
+                </div>
+                <div class="role-box">
+                    <h3>Tour Guide</h3>
+                    <p>Publish tours, plan day-by-day itineraries, reply to reviews and track earnings.</p>
+                </div>
+                <div class="role-box">
+                    <h3>Service Provider</h3>
+                    <p>List rooms, answer booking requests, manage a room calendar and bus seats.</p>
+                </div>
+                <div class="role-box">
+                    <h3>Admin</h3>
+                    <p>Manage accounts, approve new service providers, answer support tickets and run promo codes.</p>
+                </div>
+            </div>
+            <p><a href="signup.html" class="btn btn-coral">Join TRAVESTRO</a></p>
+        </section>
+
+    </main>
+
+    <footer class="site-foot">
+        <div>
+            <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+            <p>A tourism and tourist management system built for CSC 3215 Web Technologies.</p>
+        </div>
+        <div>
+            <h4>Visit us</h4>
+            <p>408/1 Kuratoli Road<br>Khilkhet, Dhaka 1229<br>hello@travestro.com</p>
+        </div>
+        <div>
+            <h4>Help desk</h4>
+            <p>Sat - Thu: 10 AM - 8 PM<br>Friday: closed<br>Hotline: 09610-000000</p>
+        </div>
+    </footer>
+
+    <script src="scripts/records.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/home.js"></script>
+</body>
+</html>

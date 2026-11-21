@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TRAVESTRO traveller dashboard">
+    <title>Traveller | TRAVESTRO</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="dash">
+
+    <aside class="sidebar">
+        <a href="index.html" class="logo">TRAVE<span>STRO</span></a>
+
+        <div class="profile">
+            <span class="avatar">AS</span>
+            <div><strong>MOHAMMAD AQIL SHAFIYEE</strong><small>Traveller</small></div>
+        </div>
+
+        <button type="button" class="menu-link current" data-panel="panelTrips">My Trips</button>
+        <button type="button" class="menu-link" data-panel="panelWishlist">Wishlist Board</button>
+        <button type="button" class="menu-link" data-panel="panelSplitter">Expense Splitter</button>
+        <button type="button" class="menu-link" data-panel="panelConverter">Currency Converter</button>
+
+        <a href="signin.html" class="signout">&larr; Sign out</a>
+    </aside>
+
+    <div class="workspace">
+        <header class="topbar">
+            <h1 id="panelTitle">My Trips</h1>
+            <span class="muted" id="todayText"></span>
+        </header>
+
+        <main>
+
+
+            <section class="panel" id="panelTrips">
+                <div class="tiles">
+                    <div class="tile"><b id="nRequested">0</b><span>Requested</span></div>
+                    <div class="tile"><b id="nConfirmed">0</b><span>Confirmed</span></div>
+                    <div class="tile"><b id="nCompleted">0</b><span>Completed</span></div>
+                </div>
+
+                <div class="split">
+                    <div class="box">
+                        <h2>My trip requests</h2>
+                        <p class="muted">Only <strong>Requested</strong> trips can be changed or deleted. Confirmed
+                            trips are locked.</p>
+                        <div class="toolbar">
+                            <label for="tripSearch" class="hidden">Search</label>
+                            <input type="text" id="tripSearch" placeholder="Search tour or city">
+                            <label for="tripFilter" class="hidden">Status</label>
+                            <select id="tripFilter">
+                                <option value="">All trips</option>
+                                <option>Requested</option>
+                                <option>Confirmed</option>
+                                <option>Completed</option>
+                            </select>
+                        </div>
+                        <div class="table-scroll">
+                            <table class="grid-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tour</th>
+                                        <th>Start</th>
+                                        <th>People</th>
+                                        <th>Cost</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tripRows"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <form class="box" id="tripForm" novalidate>
+                        <h2 id="tripFormTitle">Request a tour</h2>
+                        <div class="field">
+                            <label for="tripTour">Tour</label>
+                            <select id="tripTour"></select>
+                            <small class="field-error" id="tripTourError"></small>
+                        </div>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="tripDate">Start date</label>
+                                <input type="date" id="tripDate">
+                                <small class="field-error" id="tripDateError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="tripPeople">People</label>
+                                <input type="number" id="tripPeople" min="1" max="10" value="1">
+                                <small class="field-error" id="tripPeopleError"></small>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="tripPhone">Contact number</label>
+                            <input type="tel" id="tripPhone" placeholder="01XXXXXXXXX">
+                            <small class="field-error" id="tripPhoneError"></small>
+                        </div>
+                        <div class="field">
+                            <label for="tripNote">Note for the guide <span class="counter" id="noteCount">0 /
+                                    150</span></label>
+                            <textarea id="tripNote" rows="3" maxlength="150"
+                                placeholder="Food, pickup point, anything else"></textarea>
+                        </div>
+                        <p class="notice good" id="tripEstimate">Pick a tour to see the cost.</p>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-coral" id="tripSaveBtn">Send request</button>
+                            <button type="button" class="btn btn-light" id="tripCancelBtn">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+
+            <section class="panel hidden" id="panelWishlist">
+                <form class="box" id="wishForm" novalidate>
+                    <h2>Add a dream place</h2>
+                    <div class="toolbar">
+                        <label for="wishPlace" class="hidden">Place</label>
+                        <input type="text" id="wishPlace" placeholder="Place, e.g. Sajek Valley">
+                        <label for="wishCountry" class="hidden">Country</label>
+                        <input type="text" id="wishCountry" placeholder="Country">
+                        <label for="wishStage" class="hidden">Stage</label>
+                        <select id="wishStage">
+                            <option>Dream</option>
+                            <option>Planned</option>
+                            <option>Visited</option>
+                        </select>
+                        <button type="submit" class="btn btn-coral">Add</button>
+                    </div>
+                    <small class="field-error" id="wishPlaceError"></small>
+                    <small class="field-error" id="wishCountryError"></small>
+                </form>
+
+                <div class="board">
+                    <div class="lane">
+                        <h3>Dream <span class="muted" id="countDream"></span></h3>
+                        <div id="laneDream"></div>
+                    </div>
+                    <div class="lane">
+                        <h3>Planned <span class="muted" id="countPlanned"></span></h3>
+                        <div id="lanePlanned"></div>
+                    </div>
+                    <div class="lane">
+                        <h3>Visited <span class="muted" id="countVisited"></span></h3>
+                        <div id="laneVisited"></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="panel hidden" id="panelSplitter">
+                <div class="split">
+                    <div>
+                        <div class="box">
+                            <h2>Group expenses</h2>
+                            <div class="table-scroll">
+                                <table class="grid-table">
+                                    <thead>
+                                        <tr>
+                                            <th>What</th>
+                                            <th>Amount</th>
+                                            <th>Paid by</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expenseRows"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <h2>Who owes whom</h2>
+                            <div class="tiles">
+                                <div class="tile"><b id="totalSpent">৳0</b><span>Total spent</span></div>
+                                <div class="tile"><b id="perHead">৳0</b><span>Each person's share</span></div>
+                            </div>
+                            <div id="balanceList"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <form class="box" id="friendForm" novalidate>
+                            <h2>Travel group</h2>
+                            <div id="friendChips" class="chips"></div>
+                            <div class="field">
+                                <label for="friendName">Add a friend</label>
+                                <input type="text" id="friendName" placeholder="First name">
+                                <small class="field-error" id="friendNameError"></small>
+                            </div>
+                            <button type="submit" class="btn btn-light">Add friend</button>
+                        </form>
+
+                        <form class="box" id="expenseForm" novalidate>
+                            <h2>Add an expense</h2>
+                            <div class="field">
+                                <label for="expTitle">What was it for?</label>
+                                <input type="text" id="expTitle" placeholder="e.g. Bus tickets">
+                                <small class="field-error" id="expTitleError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="expAmount">Amount (৳)</label>
+                                <input type="number" id="expAmount" min="1">
+                                <small class="field-error" id="expAmountError"></small>
+                            </div>
+                            <div class="field">
+                                <label for="expPaidBy">Paid by</label>
+                                <select id="expPaidBy"></select>
+                                <small class="field-error" id="expPaidByError"></small>
+                            </div>
+                            <button type="submit" class="btn btn-coral">Add expense</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="panel hidden" id="panelConverter">
+                <div class="split">
+                    <form class="box" id="convertForm" novalidate>
+                        <h2>Convert money</h2>
+                        <div class="field">
+                            <label for="convAmount">Amount</label>
+                            <input type="number" id="convAmount" min="0" placeholder="e.g. 100">
+                            <small class="field-error" id="convAmountError"></small>
+                        </div>
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="convFrom">From</label>
+                                <select id="convFrom"></select>
+                            </div>
+                            <div class="field">
+                                <label for="convTo">To</label>
+                                <select id="convTo"></select>
+                                <small class="field-error" id="convToError"></small>
+                            </div>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-coral">Convert</button>
+                            <button type="button" class="btn btn-light" id="swapBtn">&#8645; Swap</button>
+                        </div>
+                        <p class="result-line hidden" id="convResult"></p>
+                    </form>
+
+                    <div class="box">
+                        <h2>Today's sample rates</h2>
+                        <p class="muted">Taka for 1 unit. These are fixed sample numbers for the prototype.</p>
+                        <table class="grid-table">
+                            <thead>
+                                <tr>
+                                    <th>Currency</th>
+                                    <th>1 unit =</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rateRows"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="scripts/records.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/traveler.js"></script>
+</body>
+
+</html>
