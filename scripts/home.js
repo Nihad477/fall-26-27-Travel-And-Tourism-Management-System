@@ -1,12 +1,8 @@
-/* =========================================================
-   TRAVESTRO - home.js
-   Public tour search on the home page.
-   ========================================================= */
+
 
 let chosenTag = "All";
 
 
-// Draw the tour cards that match the search, tag and budget
 function showTours() {
     let keyword = document.getElementById("tourSearch").value;
     let budget = Number(document.getElementById("budgetFilter").value);
@@ -21,7 +17,7 @@ function showTours() {
             guideName = guide.fullName;
         }
 
-        // skip the tour if it does not match
+        
         if (chosenTag !== "All" && tour.tag !== chosenTag) {
             continue;
         }
@@ -58,7 +54,7 @@ function showTours() {
 }
 
 
-// Tag chips: the chosen chip gets the class "on"
+
 function pickTag(tag, number) {
     let chips = document.getElementById("tagChips").getElementsByTagName("button");
     for (let i = 0; i < chips.length; i++) {
@@ -79,7 +75,7 @@ function pickAdventure() { pickTag("Adventure", 3); }
 function pickHeritage()  { pickTag("Heritage", 4); }
 
 
-// Hero search box: copy the word into the main search and scroll down
+
 function heroSearch() {
     document.getElementById("tourSearch").value = document.getElementById("heroKeyword").value;
     showTours();
@@ -88,7 +84,7 @@ function heroSearch() {
 }
 
 
-// Connect the events
+
 let chips = document.getElementById("tagChips").getElementsByTagName("button");
 chips[0].addEventListener("click", pickAll);
 chips[1].addEventListener("click", pickNature);

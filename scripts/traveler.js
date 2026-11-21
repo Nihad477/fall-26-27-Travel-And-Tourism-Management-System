@@ -1,19 +1,11 @@
-/* =========================================================
-   TRAVESTRO - traveler.js
-   Traveller dashboard:
-     My Trips (create, read, update, delete, search)
-     1. Wishlist Board   2. Expense Splitter   3. Currency Converter
-   ========================================================= */
-
-const me = "traveler";     // the traveller who is signed in
-let editingTripId = null;  // null = new request
 
 
-/* =========================================================
-   PANEL 1: MY TRIPS
-   ========================================================= */
+const me = "traveler";     
+let editingTripId = null;  
 
-// Fill the tour drop-down
+
+
+
 function fillTourSelect() {
     let options = "<option value=''>Choose a tour</option>";
     for (let i = 0; i < tours.length; i++) {
@@ -23,7 +15,7 @@ function fillTourSelect() {
     document.getElementById("tripTour").innerHTML = options;
 }
 
-// Draw the table of my trips
+
 function showTrips() {
     let keyword = document.getElementById("tripSearch").value;
     let filter = document.getElementById("tripFilter").value;
@@ -38,7 +30,7 @@ function showTrips() {
             continue;
         }
 
-        // tiles count all my trips
+       
         if (trip.status === "Requested") {
             requested = requested + 1;
         } else if (trip.status === "Confirmed") {
@@ -91,7 +83,7 @@ function showTrips() {
     document.getElementById("nCompleted").innerHTML = completed;
 }
 
-// Live cost line under the form
+
 function updateEstimate() {
     let tour = findTour(Number(document.getElementById("tripTour").value));
     let people = Number(document.getElementById("tripPeople").value);
@@ -104,7 +96,7 @@ function updateEstimate() {
     line.innerHTML = people + " x " + money(tour.price) + " = " + money(people * tour.price) + " for " + tour.days + " day(s)";
 }
 
-// Live character counter for the note
+
 function countNote() {
     let length = document.getElementById("tripNote").value.length;
     document.getElementById("noteCount").innerHTML = length + " / 150";
@@ -190,7 +182,7 @@ function saveTrip() {
         valid = false;
     }
 
-    // the same tour on the same date cannot be requested twice
+    
     for (let i = 0; i < trips.length; i++) {
         let t = trips[i];
         if (t.traveler === me && t.id !== editingTripId && t.tourId === tourId && t.startDate === startDate) {
@@ -232,10 +224,6 @@ function saveTrip() {
 }
 
 
-/* =========================================================
-   PANEL 2: WISHLIST BOARD (unique feature 1)
-   Places move Dream -> Planned -> Visited
-   ========================================================= */
 
 const stages = ["Dream", "Planned", "Visited"];
 
@@ -280,7 +268,7 @@ function showWishlist() {
     }
 }
 
-// step = -1 moves left, +1 moves right
+
 function moveWish(id, step) {
     let w = getById(wishlist, id);
     let newPos = stages.indexOf(w.stage) + step;
@@ -335,12 +323,9 @@ function addWish() {
 }
 
 
-/* =========================================================
-   PANEL 3: EXPENSE SPLITTER (unique feature 2)
-   ========================================================= */
 
 function showSplitter() {
-    // friend chips and the "paid by" drop-down
+    
     let chips = "";
     let options = "";
     for (let i = 0; i < friends.length; i++) {
@@ -350,7 +335,7 @@ function showSplitter() {
     document.getElementById("friendChips").innerHTML = chips;
     document.getElementById("expPaidBy").innerHTML = options;
 
-    // expense table
+    
     let rows = "";
     let total = 0;
     for (let i = 0; i < expenses.length; i++) {
@@ -369,7 +354,7 @@ function showSplitter() {
     }
     document.getElementById("expenseRows").innerHTML = rows;
 
-    // who owes whom: what you paid minus your fair share
+    
     let share = 0;
     if (friends.length > 0) {
         share = total / friends.length;
@@ -483,10 +468,6 @@ function addExpense() {
 }
 
 
-/* =========================================================
-   PANEL 4: CURRENCY CONVERTER (unique feature 3)
-   Every currency is changed to taka first, then to the target.
-   ========================================================= */
 
 function fillCurrencies() {
     let options = "";
@@ -556,7 +537,7 @@ function swapCurrencies() {
 }
 
 
-/* ---------- connect the events ---------- */
+
 document.getElementById("tripForm").onsubmit = saveTrip;
 document.getElementById("tripTour").addEventListener("change", updateEstimate);
 document.getElementById("tripPeople").addEventListener("keyup", updateEstimate);
@@ -573,7 +554,7 @@ document.getElementById("convertForm").onsubmit = convertMoney;
 document.getElementById("swapBtn").addEventListener("click", swapCurrencies);
 
 
-/* ---------- start ---------- */
+
 setupSidebar();
 fillTourSelect();
 showTrips();
