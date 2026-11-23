@@ -1,17 +1,8 @@
-/* =========================================================
-   TRAVESTRO - provider.js
-   Hotel & transport service provider dashboard:
-     My Rooms (create, read, update, delete, search)
-     1. Booking Requests   2. Room Calendar   3. Bus Seat Map
-   ========================================================= */
-
-const me = "provider";       // the service provider who is signed in
+const me = "provider";
 let editingStayId = null;
-let weekStart = todayDate(); // first day shown in the calendar
-let pickedSeats = [];        // seats chosen on the seat map
+let weekStart = todayDate();
+let pickedSeats = [];
 
-
-// How many rooms do I have?
 function myStayCount() {
     let count = 0;
     for (let i = 0; i < stays.length; i++) {
@@ -23,9 +14,6 @@ function myStayCount() {
 }
 
 
-/* =========================================================
-   PANEL 1: MY ROOMS
-   ========================================================= */
 
 function showStays() {
     let keyword = document.getElementById("staySearch").value;
@@ -52,15 +40,15 @@ function showStays() {
 
         rows = rows +
             "<tr>" +
-                "<td><strong>" + s.title + "</strong><br><span class='muted'>" + s.roomType + "</span></td>" +
-                "<td>" + money(s.price) + "</td>" +
-                "<td>" + s.maxGuests + "</td>" +
-                "<td>" + s.facilities.join(", ") + "</td>" +
-                "<td>" + statusTag(s.status) + "</td>" +
-                "<td>" +
-                    "<button class='btn btn-light btn-mini' onclick='editStay(" + s.id + ")'>Edit</button> " +
-                    "<button class='btn btn-danger btn-mini' onclick='deleteStay(" + s.id + ")'>Delete</button>" +
-                "</td>" +
+            "<td><strong>" + s.title + "</strong><br><span class='muted'>" + s.roomType + "</span></td>" +
+            "<td>" + money(s.price) + "</td>" +
+            "<td>" + s.maxGuests + "</td>" +
+            "<td>" + s.facilities.join(", ") + "</td>" +
+            "<td>" + statusTag(s.status) + "</td>" +
+            "<td>" +
+            "<button class='btn btn-light btn-mini' onclick='editStay(" + s.id + ")'>Edit</button> " +
+            "<button class='btn btn-danger btn-mini' onclick='deleteStay(" + s.id + ")'>Delete</button>" +
+            "</td>" +
             "</tr>";
     }
 
@@ -113,7 +101,6 @@ function deleteStay(id) {
 
     stays = removeAt(stays, indexById(stays, id));
 
-    // forget its blocked nights too (keys look like "3|2026-12-01")
     let kept = [];
     for (let i = 0; i < blockedNights.length; i++) {
         if (blockedNights[i].indexOf(id + "|") !== 0) {
@@ -201,12 +188,6 @@ function saveStay() {
     return false;
 }
 
-
-/* =========================================================
-   PANEL 2: BOOKING REQUESTS (unique feature 1)
-   ========================================================= */
-
-// All nights of a stay, e.g. check-in 12th for 2 nights -> 12th, 13th
 function nightsOf(request) {
     let list = [];
     for (let i = 0; i < request.nights; i++) {
@@ -268,14 +249,14 @@ function showRequests() {
 
         rows = rows +
             "<tr>" +
-                "<td>" + r.guest + "</td>" +
-                "<td>" + roomTitle + "</td>" +
-                "<td>" + r.checkIn + "</td>" +
-                "<td>" + r.nights + "</td>" +
-                "<td>" + r.guests + tooMany + "</td>" +
-                "<td>" + money(bill) + "</td>" +
-                "<td>" + statusTag(r.status) + "</td>" +
-                "<td>" + buttons + "</td>" +
+            "<td>" + r.guest + "</td>" +
+            "<td>" + roomTitle + "</td>" +
+            "<td>" + r.checkIn + "</td>" +
+            "<td>" + r.nights + "</td>" +
+            "<td>" + r.guests + tooMany + "</td>" +
+            "<td>" + money(bill) + "</td>" +
+            "<td>" + statusTag(r.status) + "</td>" +
+            "<td>" + buttons + "</td>" +
             "</tr>";
     }
 
@@ -330,10 +311,6 @@ function declineRequest(id) {
 }
 
 
-/* =========================================================
-   PANEL 3: ROOM CALENDAR (unique feature 2)
-   7 nights in a grid, click to block or free a night.
-   ========================================================= */
 
 function showCalendar() {
     let days = [];
@@ -341,7 +318,6 @@ function showCalendar() {
         days.push(shiftDate(weekStart, i));
     }
 
-    // header row
     let head = "<tr><th>Room</th>";
     for (let i = 0; i < days.length; i++) {
         let mark = "";
@@ -353,7 +329,6 @@ function showCalendar() {
     head = head + "<th>Free</th></tr>";
     document.getElementById("calHead").innerHTML = head;
 
-    // one row for every room
     let body = "";
     let freeTotal = 0;
     for (let r = 0; r < stays.length; r++) {
@@ -414,10 +389,6 @@ function backToToday() {
 }
 
 
-/* =========================================================
-   PANEL 4: BUS SEAT MAP (unique feature 3)
-   20 seats: 5 rows of 2 + aisle + 2
-   ========================================================= */
 
 function fillBuses() {
     let options = "";
@@ -445,7 +416,6 @@ function showSeats() {
         }
         html = html + "<button type='button' class='" + seatClass + "' onclick='clickSeat(" + seat + ")'>" + seat + "</button>";
 
-        // empty aisle after the 2nd seat of every row
         if (seat % 4 === 2) {
             html = html + "<span></span>";
         }
@@ -524,7 +494,6 @@ function sellTickets() {
 }
 
 
-/* ---------- connect the events ---------- */
 document.getElementById("stayForm").onsubmit = saveStay;
 document.getElementById("stayCancelBtn").addEventListener("click", clearStayForm);
 document.getElementById("staySearch").addEventListener("keyup", showStays);
@@ -543,14 +512,12 @@ document.getElementById("clearSeats").addEventListener("click", changeBus);
 document.getElementById("ticketForm").onsubmit = sellTickets;
 
 
-/* ---------- start ---------- */
 function refreshAll() {
     showStays();
     showRequests();
     showCalendar();
 }
 
-// a few blocked nights so the calendar is not empty
 blockedNights.push("1|" + shiftDate(todayDate(), 1));
 blockedNights.push("1|" + shiftDate(todayDate(), 2));
 blockedNights.push("2|" + shiftDate(todayDate(), 4));
